@@ -1,27 +1,23 @@
-This Python code defines a script that generates all possible strings of specified lengths using a given character set and an optional prefix. 
+This code is a brute-force string generator that produces all possible combinations of strings using a specified character set. It accepts a minimum and maximum length, a prefix, and an optional output file to save the generated strings.
 
-Brute String Generator
-Start it with python3 bruteStringer.py 4 6 "abcdefghijklmnopqrstuvwxyz1234567890" "" output.txt
-This will produce all strings with length 4 to 6 using characters from a to z and numbers 0 to 9.
-The generated strings will be saved to output.txt.
-You need to edit these settings to fit your needs.
+Example Usage:
 
-Examples:
-1. When the prefix is known, use it as the 4th parameter.
-   If you know the password is "MyPass***" and the *** are some numbers, call it with:
-   python3 bruteStringer.py 3 3 "1234567890" "MyPass" mypass_results.txt
+python3 bruteStringer.py 3 5 abc "pre_" output.txt
+This command would:
+Generate strings of length 3 to 5.
+Use the character set abc (i.e., generate combinations of "a", "b", and "c").
+Add the prefix "pre_" to each generated string.
+Save the output to output.txt.
 
-2. python3 bruteStringer.py 2 3 "ab" ""
-   This will generate and save:
-   aa
-   ab
-   ba
-   bb
-   aaa
-   aab
-   aba
-   abb
-   baa
-   bab
-   bba
-   bbb
+Sample Output:
+For min_length=3, max_length=4, charset="abc", and prefix="pre_", the output in the file could look like this:
+pre_aaa
+pre_aab
+pre_aac
+pre_aba
+pre_abb
+...
+pre_acc
+pre_baa
+pre_bab
+...
