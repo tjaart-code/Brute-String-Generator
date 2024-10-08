@@ -1,58 +1,54 @@
 #!/usr/bin/env python3
 import sys
+import argparse
 
-def rec(w, b, p, charset, file_handle):
-    for c in charset:
-        if b < w - 1:
-            rec(w, b + 1, p + c, charset, file_handle)
+def generate_combinations(length, current_depth, prefix, charset, file_handle):
+    """
+    Recursively generates all combinations of strings of a specified length
+    using the provided charset and writes them to the file.
+    """
+    for char in charset:
+        if current_depth < length - 1:
+            # Continue building the string
+            generate_combinations(length, current_depth + 1, prefix + char, charset, file_handle)
         else:
-            generated_string = p + c
-            file_handle.write(generated_string + '\n')
-            # Optional: Print progress (e.g., every 1000 strings)
-            # if count % 1000 == 0:
-            #     print(f"{count} strings generated...", end='\r')
+            # Write the completed string to the file
+            file_handle.write(prefix + char + '\n')
+
 
 def main():
-    # Check for minimum required arguments
-    if len(sys.argv) < 5:
-        print("Usage: ./bruteStringer.py min_length max_length charset prefix [output_file]")
-        sys.exit(1)
-    
-    try:
-        min_length = int(sys.argv[1])
-        max_length = int(sys.argv[2])
-    except ValueError:
-        print("Error: min_length and max_length should be integers.")
-        sys.exit(1)
-    
-    if min_length <= 0 or max_length < min_length:
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description="Brute-force string generator.")
+    parser.add_argument('min_length', type=int, help="Minimum length of the generated strings.")
+    parser.add_argument('max_length', type=int, help="Maximum length of the generated strings.")
+    parser.add_argument('charset', type=str, help="Character set to use for string generation.")
+    parser.add_argument('prefix', type=str, help="Prefix to prepend to all generated strings.")
+    parser.add_argument('output_file', nargs='?', default='output.txt', help="Output file to store generated strings. Defaults to 'output.txt'.")
+
+    args = parser.parse_args()
+
+    # Validate min_length and max_length
+    if args.min_length <= 0 or args.max_length < args.min_length:
         print("Error: Ensure that min_length > 0 and max_length >= min_length.")
         sys.exit(1)
-    
-    charset = sys.argv[3]
-    prefix = sys.argv[4]
-    
-    # Determine output file name
-    if len(sys.argv) >= 6:
-        output_file = sys.argv[5]
-    else:
-        output_file = "output.txt"
-    
+
+    # Begin the string generation process
     try:
-        with open(output_file, 'w') as file_handle:
-            print(f"Generating strings from length {min_length} to {max_length}...")
-            print(f"Using charset: {charset}")
-            print(f"Prefix: '{prefix}'")
-            print(f"Output will be saved to: {output_file}")
+        with open(args.output_file, 'w') as file_handle:
+            print(f"Generating strings of length {args.min_length} to {args.max_length}...")
+            print(f"Using charset: {args.charset}")
+            print(f"Prefix: '{args.prefix}'")
+            print(f"Output will be saved to: {args.output_file}")
             print("Generation started...")
-            
-            for length in range(min_length, max_length + 1):
-                rec(length, 0, prefix, charset, file_handle)
-            
+
+            for length in range(args.min_length, args.max_length + 1):
+                generate_combinations(length, 0, args.prefix, args.charset, file_handle)
+
             print("Generation completed successfully.")
     except IOError as e:
-        print(f"Error: Unable to write to file '{output_file}'. {e}")
+        print(f"Error: Unable to write to file '{args.output_file}'. {e}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
