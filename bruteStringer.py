@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 import sys
 
-# Symnium-8609 (2024) - bruteStringer.py
-# First posted on HBH (https://hbh.sh/home)
-
 ########################################################################################
 # Brute String Generator
 # Start it with python3 bruteStringer.py 4 6 "abcdefghijklmnopqrstuvwxyz1234567890" "" output.txt
