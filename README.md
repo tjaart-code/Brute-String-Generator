@@ -2,7 +2,7 @@
 
 This code produces all possible combinations of strings using a specified character set. It accepts a minimum and maximum length, a prefix, and an optional output file to save the generated strings.<br><br>
 
-## Example Usage:<br>
+#### Example Usage:<br>
 <br>
 <code>python3 bruteStringer.py 3 5 abc "pre_" output.txt</code><br>
 This command would:<br>
