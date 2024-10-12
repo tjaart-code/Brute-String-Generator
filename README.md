@@ -1,8 +1,10 @@
-This code is a brute-force string generator that produces all possible combinations of strings using a specified character set. It accepts a minimum and maximum length, a prefix, and an optional output file to save the generated strings.<br><br>
+# Brute Force String Generator
 
-Example Usage:<br>
+This code produces all possible combinations of strings using a specified character set. It accepts a minimum and maximum length, a prefix, and an optional output file to save the generated strings.<br><br>
+
+## Example Usage:<br>
 <br>
-python3 bruteStringer.py 3 5 abc "pre_" output.txt<br>
+<code>python3 bruteStringer.py 3 5 abc "pre_" output.txt</code><br>
 This command would:<br>
 Generate strings of length 3 to 5.<br>
 Use the character set abc (i.e., generate combinations of "a", "b", and "c").<br>
